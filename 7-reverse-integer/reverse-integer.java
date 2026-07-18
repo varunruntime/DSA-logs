@@ -1,19 +1,17 @@
 class Solution {
     public int reverse(int x) {
-        int rev = 0;
-
-        while (x != 0) {
-            int digit = x % 10;
-
-            // overflow check
-            if (rev > Integer.MAX_VALUE / 10 || rev < Integer.MIN_VALUE / 10) {
+        int revN = 0;
+        while (x != 0){
+            int lastD = x % 10;
+            if((revN > Integer.MAX_VALUE/10) || (revN == Integer.MAX_VALUE/10 && lastD > 7)){
                 return 0;
             }
-
-            rev = rev * 10 + digit;
-            x /= 10;
+            if((revN < Integer.MIN_VALUE/10) || (revN == Integer.MIN_VALUE/10 && lastD < -8)){
+                return 0;
+            }
+            revN = (revN * 10) + lastD;
+            x = x / 10;
         }
-
-        return rev;
+        return revN;
     }
 }
